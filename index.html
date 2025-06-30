@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Atul's Marriage Bio Data</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
     * {
       margin: 0;
@@ -85,24 +84,23 @@
       padding-left: 10px;
     }
 
-    .swiper {
-      width: 100%;
-      height: 350px;
-      border-radius: 10px;
-    }
-
-    .swiper-slide {
+    .image-gallery {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      overflow-x: auto;
+      gap: 15px;
     }
 
-    .swiper-slide img {
-      border-radius: 12px;
+    .image-gallery img {
+      border-radius: 10px;
       height: 300px;
-      width: auto;
+      object-fit: cover;
       border: 2px solid #d2e1f4;
+      transition: transform 0.3s ease;
       cursor: pointer;
+    }
+
+    .image-gallery img:hover {
+      transform: scale(1.05);
     }
 
     .info-card {
@@ -112,43 +110,78 @@
       padding: 20px;
       box-shadow: 0 2px 15px rgba(0,0,0,0.05);
       margin-bottom: 20px;
+      transition: all 0.3s ease;
     }
 
-    #interestForm input, #interestForm textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.07);
     }
 
-    #interestForm button {
-      background: #4b6cb7;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    #interestForm button:hover {
-      transform: scale(1.05);
-    }
-
-    #downloadBtn {
+    #downloadBtn, #topBtn {
       position: fixed;
-      bottom: 30px;
       right: 30px;
       padding: 12px 20px;
-      background-color: #4b6cb7;
-      color: white;
       border: none;
       border-radius: 50px;
       font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       cursor: pointer;
       z-index: 1000;
+    }
+
+    #downloadBtn {
+      bottom: 30px;
+      background-color: #4b6cb7;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #topBtn {
+      bottom: 80px;
+      background-color: #a2bff0;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    #topBtn:hover {
+      background-color: #4b6cb7;
+    }
+
+    #lightbox {
+      position: fixed;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.8);
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    #lightbox img {
+      max-height: 80%;
+      max-width: 80%;
+      border: 4px solid #fff;
+      border-radius: 10px;
+    }
+
+    #lightbox button {
+      background: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    #lightbox a {
+      color: white;
+      background: #4b6cb7;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     @media screen and (max-width: 768px) {
@@ -162,18 +195,34 @@
         position: static;
         box-shadow: none;
       }
+
+      .image-gallery img {
+        height: 200px;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Lightbox viewer -->
+  <div id="lightbox">
+    <button onclick="closeLightbox()">❌ Close</button>
+    <img id="lightbox-img" src="" alt="Large Preview" />
+    <a id="download-link" href="" download target="_blank">⬇️ Download Image</a>
+  </div>
+
+  <!-- Sidebar Navigation -->
   <aside>
     <h2>Sections</h2>
+    <a href="#welcome">🙏 Welcome</a>
     <a href="#images">🖼️ My Images</a>
     <a href="#basic">📌 Basic Details</a>
     <a href="#about">🙋‍♂️ About Me</a>
     <a href="#education">🎓 Education & Career</a>
     <a href="#family">👨‍👩‍👧 Family Background</a>
-    <a href="#interest">📩 Express Interest</a>
+    <a href="#hobbies">🌟 Hobbies & Strengths</a>
+    <a href="#astro">🪐 Kundli & Astro</a>
+    <a href="#contact">📞 Contact Info</a>
   </aside>
 
   <main>
@@ -182,20 +231,25 @@
       <p>Software Engineer | Bangalore | Originally from Gorakhpur</p>
     </header>
 
-    <section id="images">
-      <h2>🖼️ My Images</h2>
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="https://i.postimg.cc/MHgGgH08/image1.jpg" alt="Atul Pic 1" /></div>
-          <div class="swiper-slide"><img src="https://i.postimg.cc/DfNmSj9Y/image3.jpg" alt="Atul Pic 2" /></div>
-          <div class="swiper-slide"><img src="https://i.postimg.cc/GhstGPr3/Whats-App-Image-2025-06-21-at-23-13-52.jpg" alt="Atul Pic 3" /></div>
-        </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
+    <!-- Welcome -->
+    <section id="welcome">
+      <div class="info-card" style="text-align: center; background: #f3f8ff;">
+        <h2 style="border: none; color: #3b5998;">🙏 Welcome</h2>
+        <p style="font-size: 1.1rem;">Thank you for visiting my marriage profile! I'm truly excited to connect with someone who values respect, joy, and lifelong companionship. Take a look around — feel free to reach out if something resonates with you 😊</p>
       </div>
     </section>
 
+    <!-- Images -->
+    <section id="images">
+      <h2>🖼️ My Images</h2>
+      <div class="image-gallery">
+        <img src="https://i.postimg.cc/MHgGgH08/image1.jpg" alt="Atul Pic 1">
+        <img src="https://i.postimg.cc/DfNmSj9Y/image3.jpg" alt="Atul Pic 2">
+        <img src="https://i.postimg.cc/GhstGPr3/Whats-App-Image-2025-06-21-at-23-13-52.jpg" alt="Atul Pic 3">
+      </div>
+    </section>
+
+    <!-- Basic Details -->
     <section id="basic">
       <h2>📌 Basic Details</h2>
       <div class="info-card">
@@ -208,61 +262,72 @@
       </div>
     </section>
 
+    <!-- About Me -->
     <section id="about">
       <h2>🙋‍♂️ About Me</h2>
       <div class="info-card">
-        <p>Hello, I'm Atul - a software professional currently based in Bangalore. Originally from Gorakhpur, I value balance between modern thinking and rooted values. I believe in simplicity, mutual respect, and building a future based on trust and companionship.</p>
+        <p>Hello, I'm Atul - a software professional, currently based in Bangalore. Originally from Gorakhpur, Uttar Pradesh, I live here with my family and enjoy a balanced lifestyle rooted in strong values and modern thinking. I'm an analytical and practical person who enjoys traveling, and learning new things. I believe in simplicity, mutual respect, and building a life based on trust, understanding, and companionship.</p>
       </div>
     </section>
 
+    <!-- Education & Career -->
     <section id="education">
       <h2>🎓 Education & Career</h2>
       <div class="info-card">
-        <p><strong>Education:</strong> BE in Civil Engineering from Don Bosco Institute of Technology (2017 - 2021)</p>
+        <p><strong>Education:</strong> BE in Civil Engineering (2017 - 2021) from Don Bosco Institute of Technology</p>
         <p><strong>Career:</strong> Software Engineer</p>
       </div>
     </section>
 
+    <!-- Family -->
     <section id="family">
       <h2>👨‍👩‍👧 Family Background</h2>
       <div class="info-card">
-        <p>We are an upper-middle-class family originally from Gorakhpur. My father is a Manager at Jindal Aluminium Ltd., mother is a homemaker, and my sister works at Ernst & Young (EY).</p>
+        <p>We are an upper middle-class nuclear family from Gorakhpur, Uttar Pradesh. Currently living in Bangalore. We are a close-knit and respectful family with a blend of traditional values and modern outlook.</p>
+        <p><strong>Father:</strong> Mahendra Pratap Prajapathi (Manager at Jindal Aluminium Ltd.)</p>
+        <p><strong>Mother:</strong> Basanti Devi (Homemaker)</p>
+        <p><strong>Sister:</strong> Pooja Kumari (Working at Ernst & Young - EY)</p>
       </div>
     </section>
 
-    <section id="interest">
-      <h2>📩 Express Interest</h2>
+    <!-- Hobbies -->
+    <section id="hobbies">
+      <h2>🌟 Hobbies & Strengths</h2>
       <div class="info-card">
-        <form id="interestForm">
-          <label for="name">Your Name:</label><br />
-          <input type="text" id="name" required /><br />
-
-          <label for="email">Your Email:</label><br />
-          <input type="email" id="email" required /><br />
-
-          <label for="message">Message:</label><br />
-          <textarea id="message" rows="4" required></textarea><br />
-
-          <button type="submit">Send Interest</button>
-          <p id="formResponse" style="margin-top:10px;color:green;"></p>
-        </form>
+        <p><strong>Hobbies:</strong> Music, Sports, Traveling, Cooking, Exploring new places</p>
+        <p><strong>Traits:</strong> Honest, Independent, Hardworking, Creative</p>
       </div>
     </section>
+
+    <!-- Kundli -->
+    <section id="astro">
+      <h2>🪐 Kundli & Astro</h2>
+      <div class="info-card">
+        <p><strong>Time of Birth:</strong> 29 September 1998</p>
+        <p><strong>Manglik:</strong> Non-Manglik</p>
+      </div>
+    </section>
+
+    <!-- Contact Info -->
+    <section id="contact">
+      <h2>📞 Contact Info</h2>
+      <div class="info-card">
+        <p><strong>Permanent Address:</strong> Rajaura Khurd, Maharajganj, Gorakhpur Division, UP - 273310</p>
+        <p><strong>Current Address:</strong> Staff colony, Jindal Aluminium Ltd., Tumkur Road, Bangalore - 560073</p>
+        <p><strong>Father’s Contact:</strong> 9880437054</p>
+        <p><strong>My Contact:</strong> 8971842273</p>
+      </div>
+    </section>
+
   </main>
 
+  <!-- Buttons -->
+  <button id="topBtn" onclick="scrollToTop()">⬆️ Back to Top</button>
   <button id="downloadBtn" onclick="window.print()">⬇️ Download PDF</button>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- JavaScript -->
   <script>
-    // Swiper
-    new Swiper(".mySwiper", {
-      loop: true,
-      spaceBetween: 20,
-      pagination: { el: ".swiper-pagination", clickable: true },
-      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-    });
-
-    // Animate sections
+    // Scroll animation
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -271,21 +336,32 @@
         }
       });
     }, { threshold: 0.1 });
-    sections.forEach(section => observer.observe(section));
 
-    // Form submission
-    document.getElementById('interestForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = this.querySelector('button');
-      btn.innerText = 'Sending...';
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.innerText = 'Send Interest';
-        btn.disabled = false;
-        document.getElementById('formResponse').innerText = '✅ Message sent successfully!';
-        this.reset();
-      }, 2000);
+    sections.forEach(section => {
+      observer.observe(section);
     });
+
+    // Scroll to top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const downloadLink = document.getElementById("download-link");
+
+    document.querySelectorAll('.image-gallery img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        downloadLink.href = img.src;
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+    }
   </script>
 </body>
 </html>
