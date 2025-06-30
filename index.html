@@ -7,13 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
-
-    aside a.active {
-  background-color: #4b6cb7;
-  color: white;
-  font-weight: bold;
-}
-
     * {
       margin: 0;
       padding: 0;
@@ -259,62 +252,40 @@
 
   <button id="downloadBtn" onclick="window.print()">⬇️ Download PDF</button>
 
- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-  // Section observer target
-  const sections = document.querySelectorAll("section");
-
-  // ScrollSpy - Highlight active section in sidebar
-  const navLinks = document.querySelectorAll("aside a");
-
-  window.addEventListener("scroll", () => {
-    let currentSection = "";
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 80; // Offset for header
-      if (pageYOffset >= sectionTop) {
-        currentSection = section.getAttribute("id");
-      }
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Swiper
+    new Swiper(".mySwiper", {
+      loop: true,
+      spaceBetween: 20,
+      pagination: { el: ".swiper-pagination", clickable: true },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
     });
 
-    navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href").includes(currentSection)) {
-        link.classList.add("active");
-      }
+    // Animate sections
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
+
+    // Form submission
+    document.getElementById('interestForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('button');
+      btn.innerText = 'Sending...';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerText = 'Send Interest';
+        btn.disabled = false;
+        document.getElementById('formResponse').innerText = '✅ Message sent successfully!';
+        this.reset();
+      }, 2000);
     });
-  });
-
-  // Swiper
-  new Swiper(".mySwiper", {
-    loop: true,
-    spaceBetween: 20,
-    pagination: { el: ".swiper-pagination", clickable: true },
-    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-  });
-
-  // Animate sections
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  }, { threshold: 0.1 });
-  sections.forEach(section => observer.observe(section));
-
-  // Form submission
-  document.getElementById('interestForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('button');
-    btn.innerText = 'Sending...';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.innerText = 'Send Interest';
-      btn.disabled = false;
-      document.getElementById('formResponse').innerText = '✅ Message sent successfully!';
-      this.reset();
-    }, 2000);
-  });
-</script>
+  </script>
 </body>
 </html>
