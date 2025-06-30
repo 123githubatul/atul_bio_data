@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Atul's Marriage Bio Data</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
+
+    aside a.active {
+  background-color: #4b6cb7;
+  color: white;
+  font-weight: bold;
+}
+
     * {
       margin: 0;
       padding: 0;
@@ -16,7 +24,7 @@
 
     body {
       display: flex;
-      background: #f9f9fc;
+      background: linear-gradient(to right, #f0f4ff, #ffffff);
       color: #333;
       line-height: 1.6;
     }
@@ -84,18 +92,24 @@
       padding-left: 10px;
     }
 
-    .image-gallery {
-      display: flex;
-      overflow-x: auto;
-      gap: 15px;
+    .swiper {
+      width: 100%;
+      height: 350px;
+      border-radius: 10px;
     }
 
-    .image-gallery img {
-      border-radius: 10px;
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      border-radius: 12px;
       height: 300px;
       width: auto;
-      object-fit: cover;
       border: 2px solid #d2e1f4;
+      cursor: pointer;
     }
 
     .info-card {
@@ -105,6 +119,28 @@
       padding: 20px;
       box-shadow: 0 2px 15px rgba(0,0,0,0.05);
       margin-bottom: 20px;
+    }
+
+    #interestForm input, #interestForm textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    #interestForm button {
+      background: #4b6cb7;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    #interestForm button:hover {
+      transform: scale(1.05);
     }
 
     #downloadBtn {
@@ -133,10 +169,6 @@
         position: static;
         box-shadow: none;
       }
-
-      .image-gallery img {
-        height: 200px;
-      }
     }
   </style>
 </head>
@@ -148,9 +180,7 @@
     <a href="#about">🙋‍♂️ About Me</a>
     <a href="#education">🎓 Education & Career</a>
     <a href="#family">👨‍👩‍👧 Family Background</a>
-    <a href="#hobbies">🌟 Hobbies & Strengths</a>
-    <a href="#astro">🪐 Kundli & Astro</a>
-    <a href="#contact">📞 Contact Info</a>
+    <a href="#interest">📩 Express Interest</a>
   </aside>
 
   <main>
@@ -161,10 +191,15 @@
 
     <section id="images">
       <h2>🖼️ My Images</h2>
-      <div class="image-gallery">
-        <img src="https://i.postimg.cc/MHgGgH08/image1.jpg" alt="Atul Pic 1">
-        <img src="https://i.postimg.cc/DfNmSj9Y/image3.jpg" alt="Atul Pic 2">
-        <img src="https://i.postimg.cc/GhstGPr3/Whats-App-Image-2025-06-21-at-23-13-52.jpg" alt="Atul Pic 3">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="https://i.postimg.cc/MHgGgH08/image1.jpg" alt="Atul Pic 1" /></div>
+          <div class="swiper-slide"><img src="https://i.postimg.cc/DfNmSj9Y/image3.jpg" alt="Atul Pic 2" /></div>
+          <div class="swiper-slide"><img src="https://i.postimg.cc/GhstGPr3/Whats-App-Image-2025-06-21-at-23-13-52.jpg" alt="Atul Pic 3" /></div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
       </div>
     </section>
 
@@ -183,14 +218,14 @@
     <section id="about">
       <h2>🙋‍♂️ About Me</h2>
       <div class="info-card">
-        <p>Hello, I'm Atul - a software professional, currently based in Bangalore. Originally from Gorakhpur, Uttar Pradesh, I live here with my family and enjoy a balanced lifestyle rooted in strong values and modern thinking. I'm an analytical and practical person who enjoys traveling, and learning new things. I believe in simplicity, mutual respect, and building a life based on trust, understanding, and companionship.</p>
+        <p>Hello, I'm Atul - a software professional currently based in Bangalore. Originally from Gorakhpur, I value balance between modern thinking and rooted values. I believe in simplicity, mutual respect, and building a future based on trust and companionship.</p>
       </div>
     </section>
 
     <section id="education">
       <h2>🎓 Education & Career</h2>
       <div class="info-card">
-        <p><strong>Education:</strong> BE in Civil Engineering (2017 - 2021) from Don Bosco Institute of Technology</p>
+        <p><strong>Education:</strong> BE in Civil Engineering from Don Bosco Institute of Technology (2017 - 2021)</p>
         <p><strong>Career:</strong> Software Engineer</p>
       </div>
     </section>
@@ -198,56 +233,88 @@
     <section id="family">
       <h2>👨‍👩‍👧 Family Background</h2>
       <div class="info-card">
-        <p>We are an upper middle-class nuclear family from Gorakhpur, Uttar Pradesh. Currently living in Bangalore. We are a close-knit and respectful family with a blend of traditional values and modern outlook.</p>
-        <p><strong>Father:</strong> Mahendra Pratap Prajapathi (Manager at Jindal Aluminium Ltd.)</p>
-        <p><strong>Mother:</strong> Basanti Devi (Homemaker)</p>
-        <p><strong>Sister:</strong> Pooja Kumari (Working at Ernst & Young - EY)</p>
+        <p>We are an upper-middle-class family originally from Gorakhpur. My father is a Manager at Jindal Aluminium Ltd., mother is a homemaker, and my sister works at Ernst & Young (EY).</p>
       </div>
     </section>
 
-    <section id="hobbies">
-      <h2>🌟 Hobbies & Strengths</h2>
+    <section id="interest">
+      <h2>📩 Express Interest</h2>
       <div class="info-card">
-        <p><strong>Hobbies:</strong> Music, Sports, Traveling, Cooking, Exploring new places</p>
-        <p><strong>Traits:</strong> Honest, Independent, Hardworking, Creative</p>
-      </div>
-    </section>
+        <form id="interestForm">
+          <label for="name">Your Name:</label><br />
+          <input type="text" id="name" required /><br />
 
-    <section id="astro">
-      <h2>🪐 Kundli & Astro</h2>
-      <div class="info-card">
-        <p><strong>Time of Birth:</strong> 29 September 1998</p>
-        <p><strong>Manglik:</strong> Non-Manglik</p>
-      </div>
-    </section>
+          <label for="email">Your Email:</label><br />
+          <input type="email" id="email" required /><br />
 
-    <section id="contact">
-      <h2>📞 Contact Info</h2>
-      <div class="info-card">
-        <p><strong>Permanent Address:</strong> Rajaura Khurd, Maharajganj, Gorakhpur Division, UP - 273310</p>
-        <p><strong>Current Address:</strong> Staff colony, Jindal Aluminium Ltd., Tumkur Road, Bangalore - 560073</p>
-        <p><strong>Father’s Contact:</strong> 9880437054</p>
-        <p><strong>My Contact:</strong> 8971842273</p>
+          <label for="message">Message:</label><br />
+          <textarea id="message" rows="4" required></textarea><br />
+
+          <button type="submit">Send Interest</button>
+          <p id="formResponse" style="margin-top:10px;color:green;"></p>
+        </form>
       </div>
     </section>
   </main>
 
   <button id="downloadBtn" onclick="window.print()">⬇️ Download PDF</button>
 
-  <script>
-    // Scroll animation
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    }, { threshold: 0.1 });
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  // Section observer target
+  const sections = document.querySelectorAll("section");
 
-    sections.forEach(section => {
-      observer.observe(section);
+  // ScrollSpy - Highlight active section in sidebar
+  const navLinks = document.querySelectorAll("aside a");
+
+  window.addEventListener("scroll", () => {
+    let currentSection = "";
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 80; // Offset for header
+      if (pageYOffset >= sectionTop) {
+        currentSection = section.getAttribute("id");
+      }
     });
-  </script>
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href").includes(currentSection)) {
+        link.classList.add("active");
+      }
+    });
+  });
+
+  // Swiper
+  new Swiper(".mySwiper", {
+    loop: true,
+    spaceBetween: 20,
+    pagination: { el: ".swiper-pagination", clickable: true },
+    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+  });
+
+  // Animate sections
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.1 });
+  sections.forEach(section => observer.observe(section));
+
+  // Form submission
+  document.getElementById('interestForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button');
+    btn.innerText = 'Sending...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerText = 'Send Interest';
+      btn.disabled = false;
+      document.getElementById('formResponse').innerText = '✅ Message sent successfully!';
+      this.reset();
+    }, 2000);
+  });
+</script>
 </body>
 </html>
